@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+set -x
+
+VERSION=${VERSION:-"3.14"}
+test -d /dist
+
+git clone https://github.com/wavefrontHQ/java.git
+cd java/proxy
+git checkout ${VERSION}
+/usr/lib/mvn/bin/mvn package
+cp /java/proxy/target/wavefront-push-agent.jar /dist
